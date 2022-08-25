@@ -3,7 +3,17 @@
         <div class="box">
             <h1>Register</h1>
             <hr/>
-            <form name="form" @submit.prevent="login">
+            <form name="form" @submit.prevent="register">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-ele" name="name" id="name" v-model="form.name" @blur="$v.form.name.$touch()" :class="{'is-invalid': errorClass($v.form.name),
+                    'is-valid': validClass($v.form.name)}"/>
+                    <div v-if="$v.form.name.$error">
+                        <div v-if="!$v.form.name.required" class="error-message">
+                            <small>Name field is required</small>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" class="form-ele" name="email" id="email" v-model="form.email" @blur="$v.form.email.$touch()" :class="{'is-invalid': errorClass($v.form.email),
@@ -36,8 +46,21 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button class="btn" :disabled="$v.form.$invalid">
-                        Login
+                    <label for="cnfPassword">Confirm password</label>
+                    <input type="password" class="form-ele" name="cnfPassword" id="cnfPassword" v-model="cnfPassword" @input="$v.cnfPassword.$touch()" :class="{'is-invalid': errorClass($v.cnfPassword),
+                    'is-valid': validClass($v.cnfPassword)}"/>
+                    <div v-if="$v.cnfPassword.$error">
+                        <div v-if="!$v.cnfPassword.required" class="error-message">
+                            <small>confirm password field is required</small>
+                        </div>
+                        <div v-if="!$v.cnfPassword.matchPassword" class="error-message">
+                            <small>confirm password is not matched</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn" :disabled="$v.form.$invalid || $v.cnfPassword.$invalid">
+                        Register
                     </button>
                 </div>
             </form>
@@ -46,23 +69,29 @@
 </template>
 
 <script>
+    import {register} from '../services/auth.js';
     import Vue from 'vue';
     import {email,required} from 'vuelidate/lib/validators';
     import config from '@/config';
 
     export default {
-        name: 'LoginPage',
+        name: 'RegisterPage',
         data(){
             return {
                 processing: false,
                 form: {
+                    name: '',
                     email: '',
                     password: ''
-                }
+                },
+                cnfPassword:''
             }
         },
         validations:{
             form:{
+                name:{
+                    required
+                },
                 email:{
                     email,
                     required
@@ -73,13 +102,19 @@
                         return /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/.test(value);
                     }
                 }
+            },
+            cnfPassword:{
+                required,
+                matchPassword: function(){
+                    return this.cnfPassword===this.form.password;
+                }
             }
         },
         methods:{
-            login(){
+            register(){
                 this.$v.form.$touch();
                 if(!this.$v.form.$invalid){
-                    this.$store.dispatch('login',this.form).then(()=>this.$router.push({name:'home'})).catch(error=>{
+                    register(this.form).then(()=>this.$router.push({name:'login'})).catch(error=>{
                             Vue.$toast.open({
                                 message: error.response.data.message,
                                 duration: config.toastDuration,
