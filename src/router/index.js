@@ -2,6 +2,7 @@ import Router from 'vue-router';
 import RegisterPage from '@/components/RegisterPage.vue';
 import LoginPage from '@/components/LoginPage.vue';
 import HomePage from '@/components/HomePage.vue';
+import VerifyOTPPage from '@/components/VerifyOTPPage.vue';
 
 // import store from '@/store';
 
@@ -26,6 +27,11 @@ const router = new Router({
             name: 'home',
             path:'/home',
             component: HomePage
+        },
+        {
+            name: 'verifyOTP',
+            path:'/verifyOTP',
+            component: VerifyOTPPage
         },
         // {
         //     name: 'page-not-found',

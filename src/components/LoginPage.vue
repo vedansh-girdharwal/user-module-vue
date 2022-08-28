@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="box">
-            <h1>Register</h1>
+            <h1>Login</h1>
             <hr/>
             <form name="form" @submit.prevent="login">
                 <div class="form-group">
@@ -41,6 +41,15 @@
                     </button>
                 </div>
             </form>
+            <div class="redirect">
+                <hr>
+                Don't have an account? <a @click="redirect">Register</a>
+            </div>
+        </div>
+        <div class="links">
+            <span><a >Signin with Google</a></span>
+            <span>|</span>
+            <span><a @click="forgotPassword">Forgot your password?</a></span>
         </div>
     </div>
 </template>
@@ -95,11 +104,20 @@
             },
             errorClass(field){
                 return field.$error;
+            },
+            redirect(){
+                this.$router.push({name: 'register'});
+            },
+            forgotPassword(){
+                this.$router.push({name: 'forgotPassword'});
             }
         }
     }
 </script>
 
 <style>
-    
+    .links *{
+        padding: 0.5em;
+        color: white;
+    }
 </style>

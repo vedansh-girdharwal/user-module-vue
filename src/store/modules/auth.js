@@ -1,15 +1,17 @@
-import {login} from '@/services/auth';
+import {register,login} from '@/services/auth';
 
 const TOKEN_KEY = 'token';
 const EMAIL_KEY = 'email';
 const ROLE_KEY = 'role';
+const USER_ID = 'userId';
 
 const auth = {
     state:{
         token:localStorage.getItem(TOKEN_KEY) || "",
         email:localStorage.getItem(EMAIL_KEY) || "",
         role:localStorage.getItem(ROLE_KEY) || "",
-        name: ''
+        name: '',
+        userId:localStorage.getItem(USER_ID)||""
     },
     getters:{
         isAuthenticated(state){
@@ -20,6 +22,9 @@ const auth = {
         },
         getName(state){
             return state.name;
+        },
+        getUserId(state){
+            return state.userId;
         }
     },
     mutations:{
@@ -34,9 +39,21 @@ const auth = {
         },
         setName(state, name){
             state.name = name;
+        },
+        setUserId(state,userId){
+            state.userId = userId
         }
     },
     actions:{
+        register({commit},form){
+            return register(form)
+                .then(response=>{
+                    const {_id}=response.data;
+                    localStorage.setItem(USER_ID,_id);
+                    commit('setUserId',_id);
+                    return _id;
+                })
+        },
         login({commit},form){
             return login(form)
                 .then(response=>{
@@ -52,6 +69,15 @@ const auth = {
 
                     return email;
                 })
+        },
+        logout({commit}){
+            localStorage.removeItem(EMAIL_KEY);
+            localStorage.removeItem(ROLE_KEY);
+            localStorage.removeItem(TOKEN_KEY);
+            commit('setToken','');
+            commit('setEmail','');
+            commit('setRole','');
+            commit('setName','');
         }
     }
 }
