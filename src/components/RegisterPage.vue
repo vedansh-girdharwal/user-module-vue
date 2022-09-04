@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button class="btn primary-btn" :disabled="$v.form.$invalid || $v.cnfPassword.$invalid">
+                    <button class="btn " :disabled="$v.form.$invalid || $v.cnfPassword.$invalid">
                         Register
                     </button>
                 </div>
@@ -78,7 +78,6 @@
 </template>
 
 <script>
-    // import {register} from '../services/auth.js';
     import Vue from 'vue';
     import {email,required} from 'vuelidate/lib/validators';
     import config from '@/config';
@@ -124,7 +123,11 @@
                 this.$v.form.$touch();
                 if(!this.$v.form.$invalid){
                     this.$store.dispatch('register',this.form).then((res)=>{
-                        console.log(res)
+                        Vue.$toast.open({
+                                message: res.message,
+                                duration: config.toastDuration,
+                                type: 'success'
+                            });
                         this.$router.push({name:'verifyOTP'})}).catch(error=>{
                             Vue.$toast.open({
                                 message: error.response.data.message,
@@ -162,7 +165,9 @@
         text-align: center;
     }
     body{
-        background-color: hsla(120,70%,40%,0.4);
+        /* background-color: hsla(120,70%,40%,0.4); */
+        background-image: url('../assets/bg.jpg');
+        background-size: 100% 100%;
         margin: 0px;
     }
     .container{
@@ -200,6 +205,9 @@
         border: 1px solid green;
         font-size: 1.2em;
     }
+    .error-message{
+        color: crimson;
+    }
     .redirect{
         background-color: rgb(227, 227, 227);
         border-bottom-left-radius: 1em;
@@ -222,6 +230,10 @@
     .btn:hover{
         background-color: hsla(120,60%,40%,0.6) ;
         cursor: pointer;
+    }
+    .btn:disabled{
+        background-color: rgba(38, 100, 38, 0.305);
+        cursor:initial;
     }
     .redirect a{
         color: green;

@@ -1,9 +1,7 @@
 <template>
     <div>
-        <NavBar 
-        :name="names"
-        :email="email"/>
-        <h1>Welcome <span style="color: white">{{names}}</span></h1>
+        <NavBar />
+        <h1>Welcome <span style="color: white">{{name}}</span></h1>
     </div>
 </template>
 
@@ -16,14 +14,16 @@ export default {
     },
     data(){
         return {
-            name: this.$store.getters.getName,
-            email: localStorage.getItem('email')
+            name: '',
+            email: ''
         }
     },
-    computed:{
-        names(){
-            return this.$store.getters.getName
-        }
+    created(){
+        this.$store.dispatch('getUser')
+            .then((res)=>{
+                this.name = res.user.name;
+                this.email = res.user.email;
+            })
     }
 }
 </script>
@@ -31,6 +31,7 @@ export default {
 <style scoped>
     body{
         margin: 0px;
+        background-size: 100% 100%;
     }
 
 </style>

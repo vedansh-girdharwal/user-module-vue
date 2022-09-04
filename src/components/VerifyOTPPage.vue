@@ -23,6 +23,9 @@
                 <button class="btn">Verify</button>
             </form>
         </div>
+        <div class="links">
+            <span><a @click="resendOTP">Resend OTP</a></span>
+        </div>
 
     </div>
 </template>
@@ -31,7 +34,7 @@
 import Vue from 'vue';
 import config from '../config.js';
 import { required, minLength,maxLength} from 'vuelidate/lib/validators';
-import {verifyOTP} from '../services/auth.js';
+import {verifyOTP, resendOTP} from '../services/auth.js';
 export default {
     name: 'VerifyOTPPage',
     data(){
@@ -50,8 +53,16 @@ export default {
         verify(){
             this.$v.otp.$touch();
             if(!this.$v.otp.$invalid){
-                verifyOTP(this.otp).then(()=>{
-                    this.$router.push({name:'login'});
+                verifyOTP(this.otp,this.$store.getters.getUserId).then((res)=>{
+                    if(res.status ==='VERIFIED'){
+                        this.$router.push({name:'success', params:{message:'Email has been verified. You can now '}});
+                    }else{
+                        Vue.$toast.open({
+                                message: "Invalid input. Check the OTP",
+                                duration: config.toastDuration,
+                                type: 'error'
+                            });
+                    }
                 }).catch(error=>{
                             Vue.$toast.open({
                                 message: error.response.data.message,
@@ -61,6 +72,22 @@ export default {
                         }
                 )
             }
+        },
+        resendOTP(){
+            resendOTP(this.$store.getters.getUserId)
+            .then((res)=>{
+                Vue.$toast.open({
+                    message: res.message,
+                    duration: config.toastDuration,
+                    type: 'success'
+                });
+            }).catch(error=>{
+                Vue.$toast.open({
+                    message: error.response.data.message,
+                    duration: config.toastDuration,
+                    type: 'error'
+                });
+            })
         },
         validClass(field){
             return !field.$invalid && field.$model && field.$dirty;
@@ -72,6 +99,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+    .btn{
+        margin-left: 3.5%;
+        width: 93%;
+    }
 </style>

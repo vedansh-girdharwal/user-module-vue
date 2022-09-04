@@ -47,7 +47,11 @@
             </div>
         </div>
         <div class="links">
-            <span><a >Signin with Google</a></span>
+            <!-- <div id="g-signin2"></div> -->
+            <!-- <div v-if="profile">
+                <pre>{{ profile }}</pre>
+                <button @click="signOut">Sign Out</button>
+            </div> -->
             <span>|</span>
             <span><a @click="forgotPassword">Forgot your password?</a></span>
         </div>
@@ -70,6 +74,10 @@
                 }
             }
         },
+        // mounted() {
+        //     this.initGoogleAuth();
+        //     this.renderGoogleAuthButton();
+        // },
         validations:{
             form:{
                 email:{
@@ -88,7 +96,15 @@
             login(){
                 this.$v.form.$touch();
                 if(!this.$v.form.$invalid){
-                    this.$store.dispatch('login',this.form).then(()=>this.$router.push({name:'home'})).catch(error=>{
+                    this.$store.dispatch('login',this.form)
+                    .then((response)=>{
+                        Vue.$toast.open({
+                                message: response.message,
+                                duration: config.toastDuration,
+                                type: 'success'
+                            });
+                        this.$router.push({name:'home',params: { name:response.data.name }})})
+                    .catch(error=>{
                             Vue.$toast.open({
                                 message: error.response.data.message,
                                 duration: config.toastDuration,
@@ -110,14 +126,52 @@
             },
             forgotPassword(){
                 this.$router.push({name: 'forgotPassword'});
-            }
+            },
+            // onSignIn(user) {
+            //     const profile = user.getBasicProfile();
+            //     const fullName = profile.getName();
+            //     const email = profile.getEmail();
+            //     const imageUrl = profile.getImageUrl();
+            //     this.profile = { fullName, email, imageUrl };
+            //     console.log(profile);
+            // },
+
+            // signOut() {
+            //     var auth2 = window.gapi.auth2.getAuthInstance();
+            //     auth2.signOut().then(() => {
+            //         console.log("User signed out");
+            //         this.profile = null;
+            //     });
+            // },
+
+            // initGoogleAuth() {
+            //     window.gapi.load("auth2", function () {
+            //         window.gapi.auth2.init();
+            //     });
+            // },
+
+            // renderGoogleAuthButton() {
+            //     window.gapi.signin2.render("g-signin2", {
+            //         onsuccess: this.onSignIn
+            //     });
+            // }
         }
     }
 </script>
 
 <style>
+    /* .links{
+        display: flex;
+        align-items: center;
+    }
     .links *{
-        padding: 0.5em;
+        margin: 0.5em;
         color: white;
     }
+    .links button{
+        display: flex;
+        background-color:hsla(120,80%,30%,0.6);
+        border:white;
+        font-size: 1em;
+    } */
 </style>
