@@ -1,6 +1,7 @@
 import Router from 'vue-router';
 import RegisterPage from '@/components/RegisterPage.vue';
 import LoginPage from '@/components/LoginPage.vue';
+import DashboardPage from '@/components/DashboardPage.vue';
 import HomePage from '@/components/HomePage.vue';
 import VerifyOTPPage from '@/components/VerifyOTPPage.vue';
 import SuccessPage from '@/components/SuccessPage.vue';
@@ -20,6 +21,11 @@ const router = new Router({
     mode: 'history',
     routes:[
         {
+            name:'basic',
+            path:'/',
+            component:HomePage
+        },
+        {
             name: 'register',
             path:'/register',
             component: RegisterPage
@@ -36,8 +42,8 @@ const router = new Router({
         },
         {
             name: 'home',
-            path:'/:name/home',
-            component: HomePage,
+            path:'/:name/dashboard',
+            component: DashboardPage,
             meta
         },
         {

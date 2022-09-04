@@ -1,37 +1,18 @@
 <template>
-    <div>
-        <NavBar />
-        <h1>Welcome <span style="color: white">{{name}}</span></h1>
-    </div>
+    <button @click="redirect">Login</button>
 </template>
 
 <script>
-import NavBar from './NavBar.vue'
 export default {
     name: 'HomePage',
-    components:{
-        NavBar
-    },
-    data(){
-        return {
-            name: '',
-            email: ''
+    methods:{
+        redirect(){
+        this.$router.push({name:'login'})
         }
-    },
-    created(){
-        this.$store.dispatch('getUser')
-            .then((res)=>{
-                this.name = res.user.name;
-                this.email = res.user.email;
-            })
     }
 }
 </script>
 
-<style scoped>
-    body{
-        margin: 0px;
-        background-size: 100% 100%;
-    }
+<style>
 
 </style>
