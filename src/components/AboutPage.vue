@@ -38,10 +38,17 @@ export default {
 </script>
 
 <style scoped>
+    
     .box{
         max-width: 800px;
+        width: 80%;
         padding: 1.2em;
         box-shadow: 8px 8px 5px rgba(0, 0, 0,0.2);
+    }
+    @media (max-width:650px) {
+      .container{
+        margin-top:10em;
+        }
     }
 
 </style>

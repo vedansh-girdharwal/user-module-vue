@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button class="btn">Reset password</button>
+                    <button class="btn" :disabled="$v.form.$invalid">Reset password</button>
                 </div>
             </form>
         </div>

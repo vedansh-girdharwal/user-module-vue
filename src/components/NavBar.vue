@@ -78,9 +78,11 @@ export default {
 
 <style scoped>
     nav{
+        top: 0;
         display: flex;
         justify-content: space-between;
-        position: sticky;
+        position: fixed;
+        width: 100vw;
         background-color: white;
         border-bottom-left-radius: 1em;
         border-bottom-right-radius: 1em;
@@ -146,5 +148,10 @@ export default {
     .logoutBtn{
         background-color: rgba(197, 21, 21, 0.77);
 
+    }
+    @media (max-width:650px){
+        .nav-part2 .nav-item{
+            padding-bottom: 0.2em;
+        }
     }
 </style>

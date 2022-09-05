@@ -51,6 +51,18 @@ const getUser = ()=>{
     })
 }
 
+const updateProfile = (id,form) => {
+    return axios.get(
+        `${config.BaseUrl}/auth/${id}/updateProfile`,
+        form,
+        {
+            headers:{
+
+            }
+        }
+    )
+}
+
 const forgotPassword = (form)=>{
     return axios.post(
         `${config.BaseUrl}/auth/forgotPassword`,
@@ -155,5 +167,6 @@ export {
     forgotPassword,
     resetPassword,
     getUsers,
+    updateProfile,
     changeRole
 }

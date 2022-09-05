@@ -77,10 +77,15 @@
 
 <style scoped>
     .container{
+        margin-top: 5em;
         padding: 2em;
         align-items: center;
         justify-content: center;
     }
+    @media (max-width:650px) {
+      .container{
+        margin-top:12em;
+        }
+    }
     
-
 </style>

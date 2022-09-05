@@ -9,6 +9,7 @@ import ForgotPasswordPage from '@/components/ForgotPasswordPage.vue';
 import ResetPasswordPage from '@/components/ResetPasswordPage.vue';
 import UsersListPage from '@/components/UsersListPage.vue';
 import AboutPage from '@/components/AboutPage.vue';
+import ProfilePage from '@/components/ProfilePage.vue';
 import GoogleAuthentication from '@/components/GoogleAuthentication.vue';
 
 import store from '@/store';
@@ -34,6 +35,11 @@ const router = new Router({
             name:'auth',
             path:'/googleauth',
             component: GoogleAuthentication
+        },
+        {
+            name:'profile',
+            path:'/profile',
+            component: ProfilePage
         },
         {
             name: 'login',

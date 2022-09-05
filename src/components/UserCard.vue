@@ -69,7 +69,19 @@ export default {
         background-color: rgba(228, 228, 228, 0.821) ;
         cursor: pointer;
     }
-    @media (max-width:600px) {
-        
+    @media (max-width:650px) {
+        .box{
+            flex-direction: column;
+            size: auto;
+            padding: 3%;
+        }
+        .changeRole{
+            margin-top: 1em ;
+        }
     }
+    /* @media (max-width:400px) {
+        .box{
+            padding: 0.6em;
+    }
+    } */
 </style>

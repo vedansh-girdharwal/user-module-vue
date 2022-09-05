@@ -1,7 +1,9 @@
 <template>
     <div>
         <NavBar />
+        <div class="container">
         <h1>Welcome <span style="color: white">{{name}}</span></h1>
+        </div>
     </div>
 </template>
 
@@ -30,7 +32,6 @@ export default {
 
 <style scoped>
     body{
-        margin: 0px;
         background-size: 100% 100%;
     }
 

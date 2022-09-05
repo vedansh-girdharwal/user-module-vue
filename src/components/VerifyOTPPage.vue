@@ -20,11 +20,11 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn">Verify</button>
+                <button class="btn" :disabled="$v.otp.$invalid">Verify</button>
             </form>
         </div>
         <div class="links">
-            <span><a @click="resendOTP">Resend OTP</a></span>
+            <span><a @click="resendOTP" >Resend OTP</a></span>
         </div>
 
     </div>
