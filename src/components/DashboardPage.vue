@@ -34,5 +34,8 @@ export default {
     body{
         background-size: 100% 100%;
     }
+    h1{
+        color: white;
+    }
 
 </style>

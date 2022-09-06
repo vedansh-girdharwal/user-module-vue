@@ -51,16 +51,35 @@ const getUser = ()=>{
     })
 }
 
+const updateImage = (id,form) => {
+    return axios.patch(
+        `${config.BaseUrl}/auth/${id}/updateImage`,
+        form,
+        {
+            headers:{
+                'Content-Type': 'multipart/form-data'
+            }
+        }
+    ).then(res=>{
+        return res.data;
+    }).catch(error=>{
+        throw error;
+    })
+}
 const updateProfile = (id,form) => {
-    return axios.get(
+    return axios.patch(
         `${config.BaseUrl}/auth/${id}/updateProfile`,
         form,
         {
             headers:{
-
+                'Content-Type': 'application/json'
             }
         }
-    )
+    ).then(res=>{
+        return res.data;
+    }).catch(error=>{
+        throw error;
+    })
 }
 
 const forgotPassword = (form)=>{
@@ -168,5 +187,6 @@ export {
     resetPassword,
     getUsers,
     updateProfile,
+    updateImage,
     changeRole
 }

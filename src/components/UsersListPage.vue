@@ -82,10 +82,21 @@
         align-items: center;
         justify-content: center;
     }
-    @media (max-width:650px) {
-      .container{
-        margin-top:12em;
+    @media(650px<= width <=829px){
+       .container{
+        margin-top:8em;
         }
     }
+    @media (width<=650px) {
+      .container{
+        /* margin-top:260px; */
+        margin-top:15em;
+        }
+    }
+    /* @media (max-width:448px) {
+      .container{
+        margin-top:18em;
+        }
+    } */
     
 </style>

@@ -5,13 +5,13 @@
             <div class="box">
                 <div class="image">
                     <img :src="imageUrl" width="250" height= "250">
-                    <button></button>
-                    <input type="file" >
+                    <button class="btn upload hovertextUp" data-hover="Upload Image" @click="onPickFile"><font-awesome-icon icon="fa-solid fa-camera" /></button>
+                    <input type="file" style="display: none" ref="fileInput" accept="image/*" @change="onFilePicked">
                     
                 </div>
                 <div class="edit-details" v-if="edit">
                     <div class="detail">
-                        <h4>Email : {{form.email}}</h4>
+                        <h4>Email : </h4> <p>{{email}}</p>
                         <label for="name"><h4>Name</h4></label>
                         <input type="text" name="name" id="name" v-model="form.name">
                         <label for="address"><h4>Address</h4></label>
@@ -21,40 +21,43 @@
                     </div>
                     <div class="detail">
                         <label for="gender"><h4>Gender</h4></label>
-                        <select name="gender" id="gender">
+                        <select name="gender" id="gender" v-model="form.gender">
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                             <option value="other">Other</option>
                         </select>
-                        <h4>Role : {{form.role}}</h4>
-                        <h4>Profile created on : {{profileCreated}}</h4>
+                        <h4>Role : </h4> <p>{{role}}</p>
+                        <h4>Profile created on : </h4><p>{{profileCreated}}</p>
                     </div>
                 </div>
                 <div class="details" v-else>
                     <div class="detail">
-                        <h4>Email : {{form.email}}</h4>
-                        <h4>Name : {{form.name}}</h4>
-                        <h4>Address : {{form.address}}</h4>
-                        <h4>Phone no. : {{form.phone}}</h4>
+                        <h4>Email : </h4> <p>{{email}}</p>
+                        <h4>Name : </h4> <p>{{form.name}}</p>
+                        <h4>Address : </h4> <p>{{form.address}}</p>
+                        <h4>Phone no. : </h4> <p>{{form.phone}}</p>
                     </div>
                     <div class="detail">
-                        <h4>Gender : {{form.gender}}</h4>
-                        <h4>Role : {{form.role}}</h4>
-                        <h4>Profile created on : {{profileCreated}}</h4>
+                        <h4>Gender : </h4> <p>{{form.gender}}</p>
+                        <h4>Role : </h4> <p>{{role}}</p>
+                        <h4>Profile created on : </h4> <p>{{profileCreated}}</p>
                     </div>
                 </div>
                 <div class="buttons">
                 <button class="btn" @click="submit" v-if="edit">Save</button>
-                <button class="btn" @click="toggle" v-if="edit" style="background-color:crimson">Cancel</button>
+                <button class="btn cancel" @click="toggle" v-if="edit" >Cancel</button>
                 <button class="btn" @click="toggle" v-if="!edit">Edit</button>
                 </div>
             </div>
-            <button class="deleteBtn hovertext" @click="deleteAcc" data-hover="Delete Account"></button>
+            <button class="deleteBtn hovertext" @click="deleteAcc" data-hover="Delete Account"><font-awesome-icon icon="fa-solid fa-trash-can" size="xl"/></button>
         </div>
     </div>
 </template>
 
 <script>
+    import Vue from 'vue';
+    import config from '@/config.js'
+    import {updateProfile,updateImage} from '@/services/auth.js'
     import NavBar from '@/components/NavBar.vue';
     export default {
         name:'ProfilePage',
@@ -62,13 +65,15 @@
             return {
                 form:{
                     name: '',
-                    email:'',
                     gender:'',
                     address:'',
                     phone:0,
-                    role:'',
-                    image:File
+                    image:null
                 },
+
+                id:'',
+                role:'',
+                email:'',
                 imageUrl:'',
                 profileCreated:'',
                 edit:false
@@ -78,13 +83,65 @@
             NavBar
         },
         methods:{
+            onPickFile(){
+                this.$refs.fileInput.click()
+            },
+            onFilePicked(event){
+                const files = event.target.files;
+                let fileName = files[0].name;
+                if(fileName.lastIndexOf('.')<=0){
+                    return Vue.$toast.open({
+                                message: "Please select a valid file",
+                                duration: config.toastDuration,
+                                type: 'error'
+                            });
+                }
+                const fileReader = new FileReader();
+                fileReader.addEventListener('load',()=>{
+                    this.imageUrl = fileReader.result
+                    this.form.image = files[0]
+                    return updateImage(this.id,this.form)
+                        .then(response=>{
+                            if(response.status==="UPDATED"){
+                                Vue.$toast.open({
+                                message: "Profile Image successfully uploaded",
+                                duration: config.toastDuration,
+                                type: 'success'
+                                });
+                            }
+                        }).catch(error=>{
+                            Vue.$toast.open({
+                            message: error.response.data.message,
+                            duration: config.toastDuration,
+                            type: 'error'
+                            });
+                        })
+                })
+                fileReader.readAsDataURL(files[0])
+            },
             toggle(){
-                console.log(this.edit)
                 this.edit=!this.edit
 
             },
             submit(){
-
+                return updateProfile(this.id,this.form)
+                    .then(response=>{
+                        if(response.status==="UPDATED"){
+                            Vue.$toast.open({
+                                message: "Profile has been updated",
+                                duration: config.toastDuration,
+                                type: 'success'
+                            });
+                            console.log(response.response);
+                            this.edit=false;
+                        }
+                    }).catch(error=>{
+                        Vue.$toast.open({
+                            message: error.response.data.message,
+                            duration: config.toastDuration,
+                            type: 'error'
+                        });
+                    })
             },
             deleteAcc(){
 
@@ -94,12 +151,14 @@
         this.$store.dispatch('getUser')
             .then((res)=>{
                 this.form.name = res.user.name;
-                this.form.email = res.user.email;
+                this.email = res.user.email;
                 this.form.gender = res.user.gender;
+                this.role = res.user.role;
                 this.form.phone = res.user.phone;
                 this.form.address = res.user.address;
                 this.profileCreated = res.user.profileCreated;
                 this.imageUrl = res.user.imageUrl;
+                this.id = res.user._id;
             })
     }
     }
@@ -138,8 +197,8 @@
         padding: 1em;
         justify-content: space-around
     }
-    h4{
-        font-size: 1.1em;
+    h4,p{
+        font-size: 1.2em;
     }
     .detail{
         padding: 1em;
@@ -162,16 +221,55 @@
         width: 10em;
         margin: 0 1em 1em 0;
     }
+    .cancel{
+        background-color:crimson;
+    }
+    .upload {
+        width: 2.5em;
+        height: 2.5em;
+        background-color:blue;
+        padding: 3px;
+        border-radius: 4em;
+        border: none;
+        position: relative;
+        margin-top: 180px;
+        margin-left: -50px;
+    }
+    .hovertextUp:before {
+        content: attr(data-hover);
+        visibility: hidden;
+        opacity: 0;
+        width: 140px;
+        background-color: blue;
+        color: #fff;
+        font-size: 0.8em;
+        text-align: center;
+        border-radius: 5px;
+        padding: 5px 0;
+        transition: opacity 0.5s ease-in-out;
+
+        position: absolute;
+        /* z-index: 1; */
+        left: 110%;
+        top: 25%;
+    }
+
+    .hovertextUp:hover:before {
+        visibility: visible;
+        opacity: 1;
+    }
     .deleteBtn {
         width: 4em;
         height: 4em;
         background-color: crimson;
         padding: 3px;
+        color: white;
         border-radius: 4em;
         border: none;
         position: absolute;
         right: 2em;
         bottom: 1em;
+        cursor: pointer;
     }
     /* .hovertext {
         position: relative;
@@ -185,10 +283,11 @@
         width: 140px;
         background-color: crimson;
         color: #fff;
+        font-size: 1.2em;
         text-align: center;
         border-radius: 5px;
         padding: 5px 0;
-        transition: all 1s ease-in-out;
+        transition: opacity 1s ease-in-out;
 
         position: absolute;
         /* z-index: 1; */
@@ -225,13 +324,17 @@
             width: 12em;
             height: 12em;
         }
-        
         .buttons{
             flex-direction: column;
         }
         .btn{
             margin-bottom: 1em;
             width: 5em;
+        }
+        .upload{
+            width: 2em;
+            height: 2em;
+            margin-top: 150px;
         }
     }
 

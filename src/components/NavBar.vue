@@ -4,39 +4,40 @@
                 <ul class="nav-part">
                     <li class="nav-item">
                         <router-link class="nav-link" :to="{name: 'home',params: { name:name }}" exact>
-                            Home
+                            <font-awesome-icon icon="fa-solid fa-house-user" />Home
                         </router-link>
                     </li>
                     <li class="nav-item">
                         <router-link class="nav-link" :to="{name: 'about',params: { name:name }}" exact>
-                            About
+                            <font-awesome-icon icon="fa-solid fa-file-lines" />About
                         </router-link>
                     </li>
                     <li class="nav-item" v-if="role">
                         <router-link class="nav-link" :to="{name: 'users',params: { name:name }}" exact>
-                            Users List
+                            <font-awesome-icon icon="fa-solid fa-users" />  Users
                         </router-link>
                     </li>
                 </ul>
-                <ul class="nav-part">
+                <ul class="nav-part" style="margin-right:2em">
                     <li @click="toggleMenu">
                         <img src="@/assets/user-icon.jpg">
                     </li>
                 </ul>
                 <ul class="nav-part2" v-show="show">
                     <li class="nav-item" style="border:none">
+                        <img :src="imageUrl" alt="name"><br>
                         {{name}} <br>
                         {{email}}
                     </li>
                     <li class="nav-item">
                         <button class="profileBtn btn3">
                             <router-link to="/profile" exact>
-                                My Profile
+                               <font-awesome-icon icon="fa-solid fa-address-card" /> My Profile
                             </router-link>
                         </button>
                     </li>
                     <li class="nav-item">
-                        <button class="logoutBtn btn3" @click="logout">Logout</button>
+                        <button class="logoutBtn btn3" @click="logout"><font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" /> Logout</button>
                     </li>
                 </ul>
         </nav>
@@ -51,7 +52,8 @@ export default {
             show:false,
             role: this.$store.getters.isAdmin,
             name:'',
-            email:''
+            email:'',
+            imageUrl:''
         }
     },
     methods:{
@@ -70,7 +72,8 @@ export default {
             .then(res=>{
                 this.name=res.user.name,
                 this.email=res.user.email,
-                this.role = (res.user.role ==='admin')
+                this.role = (res.user.role ==='admin'),
+                this.imageUrl = res.user.imageUrl
             })
     }
 }
@@ -86,6 +89,7 @@ export default {
         background-color: white;
         border-bottom-left-radius: 1em;
         border-bottom-right-radius: 1em;
+        z-index: 1;
     }
     .nav-part{
         display: flex;
@@ -96,7 +100,7 @@ export default {
     }
     
     .nav-part .nav-item{
-        margin-right: 1em;
+        margin-right: 1.5em;
         padding: 0.5em;
     }
     li{
@@ -114,10 +118,11 @@ export default {
     }
     .nav-part2{
         position: absolute;
-        right: 0.5em;
+        right: 2em;
         top: 2.2em;
+        padding: 1em;
         background-color: white;
-        padding: 0.5em;
+        padding: 1em;
         border-bottom-left-radius: 0.5em;
         border-bottom-right-radius: 0.5em;
         box-shadow: 5px 5px rgba(0,0,0,0.2) ;
@@ -129,6 +134,11 @@ export default {
     .nav-part2 .nav-item{
         padding: 0.5em;
     }
+    .nav-item img{
+        height: 100px;
+        width: 100px;
+        border-radius: 50px;
+    }
     .btn3{
         padding: 0.5em;
         font-size: 100%;
@@ -137,6 +147,7 @@ export default {
         color:white;
         box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
         cursor: pointer;
+        margin: 0;
     }
     .btn3 > a{
         color: white;

@@ -11,12 +11,12 @@
                 Role : {{user.role}}
             </div>
             <div class="row">
-                Name : {{user.name}}
+                Created On : {{user.profileCreated}}
             </div>
         </div>
         <div class="changeRole">
             <label for="btn2">Change the role to</label>
-            <button class="btn2" :disabled="(user.name==='Vedansh Girdharwal')" @click="change(user)">{{changeRole}}</button>
+            <button class="btn2" :disabled="(user.name==='Vedansh Girdharwal')" @click="change(user)"><font-awesome-icon icon="fa-solid fa-user-tie" />  {{changeRole}}</button>
         </div>
     </div>
 </template>
@@ -42,7 +42,7 @@ export default {
         justify-content: space-between;
         margin-bottom: 1em;
         box-shadow: 5px 5px rgba(0,0,0,0.2);
-        transition:all 0.5s;
+        transition:width 0.5s;
     }
     .box:hover{
         box-shadow: 10px 10px 5px rgba(0,0,0,0.2);

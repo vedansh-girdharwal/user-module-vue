@@ -30,8 +30,8 @@ export default {
     }
     body{
         /* background-color: hsla(120,70%,40%,0.4); */
-        background-image: url('./assets/bg.jpg');
-        background-size: 100% 100%;
+        background-image: url('./assets/bg2.jpg');
+        background-size: 100% 100%; 
         margin: 0px;
     }
     .container{
@@ -43,7 +43,7 @@ export default {
         /* margin-top: 80px; */
     }
     .box{
-        background-color: rgba(255,255,255,0.8);
+        background-color: rgba(255,255,255,0.9);
         border-radius: 1em;
         width: 50%;
         display: flex;
@@ -99,7 +99,7 @@ export default {
         cursor: pointer;
     }
     .btn:disabled{
-        background-color: rgba(38, 100, 38, 0.305);
+        background-color: rgba(38, 100, 38, 0.5);
         cursor:initial;
     }
     .redirect a{

@@ -159,15 +159,16 @@
     }
 </script>
 
-<style>
-    /* .links{
+<style scoped>
+    .links *{
+            margin: 0.5em;
+            color: white;
+            cursor: pointer;
+    }
+     .links{
         display: flex;
         align-items: center;
-    }
-    .links *{
-        margin: 0.5em;
-        color: white;
-    }
+    }/*
     .links button{
         display: flex;
         background-color:hsla(120,80%,30%,0.6);
