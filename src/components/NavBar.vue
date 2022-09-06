@@ -120,7 +120,6 @@ export default {
         position: absolute;
         right: 2em;
         top: 2.2em;
-        padding: 1em;
         background-color: white;
         padding: 1em;
         border-bottom-left-radius: 0.5em;
@@ -133,11 +132,13 @@ export default {
     }
     .nav-part2 .nav-item{
         padding: 0.5em;
+        width: 200px;
     }
     .nav-item img{
-        height: 100px;
-        width: 100px;
-        border-radius: 50px;
+        height: 120px;
+        width: 120px;
+        border-radius: 61px;
+        border: 1px solid black;
     }
     .btn3{
         padding: 0.5em;

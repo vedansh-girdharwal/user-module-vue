@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button class="btn">Reset password</button>
+                    <button class="btn"><font-awesome-icon icon="fa-solid fa-key" /> Reset password</button>
                 </div>
             </form>
         </div>
@@ -82,17 +82,21 @@
             resetPassword(){
                 this.$v.form.$touch();
                 if(!this.$v.form.$invalid){
+                    this.spinner = this.$loading.show(this.$spinner);
                     resetPassword(this.form,this.$route.params.id)
-                        .then((res)=>Vue.$toast.open({
+                        .then((res)=>{
+                            this.spinner.hide()
+                            Vue.$toast.open({
                                 message: res.message,
                                 duration: config.toastDuration,
                                 type: 'success'
-                            })).then(()=>{
+                            })}).then(()=>{
                                 this.$router.push({
                                     name:'success', 
                                     params:{message:'Password has been reset. You can move to '}
                                 })
                             }).catch(error=>{
+                                this.spinner.hide()
                             Vue.$toast.open({
                                 message: error.response.data.message,
                                 duration: config.toastDuration,

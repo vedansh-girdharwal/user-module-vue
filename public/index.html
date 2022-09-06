@@ -10,7 +10,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
-  <body>
+  <body :disabled="processing">
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>

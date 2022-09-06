@@ -23,6 +23,19 @@ export default {
         box-sizing: border-box;
         font-family: 'Roboto',sans-serif;
     }
+    *::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    *::-webkit-scrollbar-track {
+        background: rgba(0, 142, 57, 0.751);
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background-color: rgb(0, 81, 173);    
+        border-radius: 20px;       
+        border: 3px solid rgb(0,142,57);
+    }
     h1{
         font-weight: 100;
         font-size: 2.5em;
@@ -31,7 +44,7 @@ export default {
     body{
         /* background-color: hsla(120,70%,40%,0.4); */
         background-image: url('./assets/bg2.jpg');
-        background-size: 100% 100%; 
+        /* background-size: 100% 100%;  */
         margin: 0px;
     }
     .container{
@@ -44,7 +57,7 @@ export default {
     }
     .box{
         background-color: rgba(255,255,255,0.9);
-        border-radius: 1em;
+        border-radius: 0.7em;
         width: 50%;
         display: flex;
         flex-direction: column;
@@ -97,6 +110,10 @@ export default {
     .btn:hover{
         background-color: hsla(120,60%,40%,0.6) ;
         cursor: pointer;
+    }
+    .disabled{
+        pointer-events: none;
+        opacity: 0.6;
     }
     .btn:disabled{
         background-color: rgba(38, 100, 38, 0.5);

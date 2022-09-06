@@ -13,6 +13,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/vue-fontawesome": "^2.0.8",
+    "@saeris/vue-spinners": "^1.0.8",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "date-fns": "^2.29.2",
@@ -21,7 +22,9 @@
     "vue": "^2.6.14",
     "vue-google-oauth2": "^1.5.8",
     "vue-google-signin-button-directive": "^1.0.3",
+    "vue-loading-overlay": "3.0",
     "vue-router": "^3.5.1",
+    "vue-spinner": "^1.0.4",
     "vue-toast-notification": "^0.6.3",
     "vuelidate": "^0.7.6",
     "vuex": "^3.6.2"

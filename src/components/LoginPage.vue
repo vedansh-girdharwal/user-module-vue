@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                     <button class="btn" :disabled="$v.form.$invalid">
-                        Login
+                        <font-awesome-icon icon="fa-solid fa-arrow-right-to-bracket" /> Login
                     </button>
                 </div>
             </form>
@@ -55,6 +55,9 @@
             <span>|</span>
             <span><a @click="forgotPassword">Forgot your password?</a></span>
         </div>
+        <div class="spinner">
+            <moon-loader :loading="processing" :color="seagreen" :size="size"></moon-loader>
+        </div>
     </div>
 </template>
 
@@ -68,6 +71,7 @@
         data(){
             return {
                 processing: false,
+                size:"100px",
                 form: {
                     email: '',
                     password: ''
@@ -96,15 +100,21 @@
             login(){
                 this.$v.form.$touch();
                 if(!this.$v.form.$invalid){
+                    this.processing=true
+                    this.spinner = this.$loading.show(this.$spinner);
                     this.$store.dispatch('login',this.form)
                     .then((response)=>{
                         Vue.$toast.open({
-                                message: response.message,
+                            message: `<font-awesome-icon icon="fa-solid fa-unlock-keyhole" /> ${response.message}`,
                                 duration: config.toastDuration,
                                 type: 'success'
                             });
-                        this.$router.push({name:'home',params: { name:response.data.name }})})
+                        this.spinner.hide()
+                        this.$router.push({name:'home',params: { name:response.data.name }})
+                        this.processing=false})
                     .catch(error=>{
+                        this.processing=false
+                        this.spinner.hide()
                             Vue.$toast.open({
                                 message: error.response.data.message,
                                 duration: config.toastDuration,

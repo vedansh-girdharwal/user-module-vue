@@ -57,7 +57,8 @@ const updateImage = (id,form) => {
         form,
         {
             headers:{
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data',
+                'Authorization':`${localStorage.getItem('token')}`
             }
         }
     ).then(res=>{
@@ -72,7 +73,8 @@ const updateProfile = (id,form) => {
         form,
         {
             headers:{
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization':`${localStorage.getItem('token')}`
             }
         }
     ).then(res=>{
@@ -99,13 +101,27 @@ const forgotPassword = (form)=>{
 };
 
 const resetPassword = (form,id)=>{
-    console.log(id);
     return axios.post(
         `${config.BaseUrl}/auth/${id}/resetPassword`,
         form,
         {
             headers:{
                 'Content-Type':'application/json'
+            }
+        }
+    ).then(res=>{
+        return res.data;
+    }).catch(error=>{
+        throw error;
+    })
+}
+
+const deleteUser = (id)=>{
+    return axios.delete(
+        `${config.BaseUrl}/auth/${id}/deleteUser`,{
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization':`${localStorage.getItem('token')}`
             }
         }
     ).then(res=>{
@@ -162,7 +178,7 @@ const getUsers = ()=>{
 
 const changeRole = (user)=>{
     return axios.patch(
-        `${config.BaseUrl}/auth/changeRole/${user._id}`,
+        `${config.BaseUrl}/auth/${user._id}/changeRole`,
         {role:user.role},
         {
             headers:{
@@ -188,5 +204,6 @@ export {
     getUsers,
     updateProfile,
     updateImage,
-    changeRole
+    changeRole,
+    deleteUser
 }

@@ -11,7 +11,7 @@
                     <input type="email" id="email" name="email" v-model="form.email" @blur="$v.form.email.$touch()" :class="{
                         'is-invalid': errorClass($v.form.email),
                         'is-valid': validClass($v.form.email)
-                    }">
+                    }" >
                     <div v-if="$v.form.email.$error">
                         <div v-if="!$v.form.email.required" class="error-message">
                             <small>Email is required</small>
@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button class="btn" :disabled="$v.form.$invalid">Reset password</button>
+                    <button class="btn" :disabled="$v.form.$invalid"><font-awesome-icon icon="fa-solid fa-envelopes-bulk" /> Send password link</button>
                 </div>
             </form>
         </div>
@@ -56,14 +56,29 @@
             forgotPassword(){
                 this.$v.form.$touch();
                 if(!this.$v.form.$invalid){
+                    this.processing=true;
                     forgotPassword(this.form)
-                        .then((res)=>Vue.$toast.open({
-                                message: res.message,
+                        .then((res)=>{
+                            if(res.status==="SENT"){
+                                this.processing = false
+                                Vue.$toast.open({
+                                    message: res.message,
+                                    duration: config.toastDuration,
+                                    type: 'success'
+                                })
+                                this.$router.push({name:"success",params:{
+                                    message:"Password reset email has been sent. "
+                                }})
+                            }else{
+                                this.processing=false;
+                                Vue.$toast.open({
+                                message: "Invalid Email",
                                 duration: config.toastDuration,
-                                type: 'success'
-                            })).then(()=>{
-                                this.$forceUpdate()
+                                type: 'error'
+                            })
+                            }
                             }).catch(error=>{
+                                this.processing=false
                             Vue.$toast.open({
                                 message: error.response.data.message,
                                 duration: config.toastDuration,

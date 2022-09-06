@@ -20,7 +20,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn" :disabled="$v.otp.$invalid">Verify</button>
+                <button class="btn" :disabled="$v.otp.$invalid"><font-awesome-icon icon="fa-solid fa-user-shield" size="xs"/> Verify</button>
             </form>
         </div>
         <div class="links">
@@ -53,10 +53,13 @@ export default {
         verify(){
             this.$v.otp.$touch();
             if(!this.$v.otp.$invalid){
+                this.spinner = this.$loading.show(this.$spinner);
                 verifyOTP(this.otp,this.$store.getters.getUserId).then((res)=>{
                     if(res.status ==='VERIFIED'){
+                        this.spinner.hide()
                         this.$router.push({name:'success', params:{message:'Email has been verified. You can now '}});
                     }else{
+                        this.spinner.hide()
                         Vue.$toast.open({
                                 message: "Invalid input. Check the OTP",
                                 duration: config.toastDuration,
@@ -64,6 +67,7 @@ export default {
                             });
                     }
                 }).catch(error=>{
+                    this.spinner.hide()
                             Vue.$toast.open({
                                 message: error.response.data.message,
                                 duration: config.toastDuration,
@@ -74,14 +78,17 @@ export default {
             }
         },
         resendOTP(){
+            this.spinner = this.$loading.show(this.$spinner);
             resendOTP(this.$store.getters.getUserId)
             .then((res)=>{
+                this.spinner.hide()
                 Vue.$toast.open({
                     message: res.message,
                     duration: config.toastDuration,
                     type: 'success'
                 });
             }).catch(error=>{
+                this.spinner.hide()
                 Vue.$toast.open({
                     message: error.response.data.message,
                     duration: config.toastDuration,

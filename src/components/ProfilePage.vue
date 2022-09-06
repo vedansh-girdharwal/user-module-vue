@@ -1,7 +1,7 @@
 <template>
     <div>
         <NavBar/>
-        <div class="container">
+        <div class="container" :class="confirmationBox?'disabled':none">
             <div class="box">
                 <div class="image">
                     <img :src="imageUrl" width="250" height= "250">
@@ -32,9 +32,9 @@
                 </div>
                 <div class="details" v-else>
                     <div class="detail">
-                        <h4>Email : </h4> <p>{{email}}</p>
-                        <h4>Name : </h4> <p>{{form.name}}</p>
-                        <h4>Address : </h4> <p>{{form.address}}</p>
+                        <h4>Email : </h4> <p class="overflow-auto">{{email}}</p>
+                        <h4>Name : </h4> <p class="overflow-auto">{{form.name}}</p>
+                        <h4>Address : </h4> <p class="overflow-auto">{{form.address}}</p>
                         <h4>Phone no. : </h4> <p>{{form.phone}}</p>
                     </div>
                     <div class="detail">
@@ -44,12 +44,17 @@
                     </div>
                 </div>
                 <div class="buttons">
-                <button class="btn" @click="submit" v-if="edit">Save</button>
-                <button class="btn cancel" @click="toggle" v-if="edit" >Cancel</button>
-                <button class="btn" @click="toggle" v-if="!edit">Edit</button>
+                <button class="btn" @click="submit" v-if="edit"><font-awesome-icon icon="fa-solid fa-floppy-disk" /> Save</button>
+                <button class="btn cancel" @click="toggle" v-if="edit" ><font-awesome-icon icon="fa-solid fa-xmark" /> Cancel</button>
+                <button class="btn" @click="toggle" v-if="!edit"><font-awesome-icon icon="fa-solid fa-pen-to-square" /> Edit</button>
                 </div>
             </div>
             <button class="deleteBtn hovertext" @click="deleteAcc" data-hover="Delete Account"><font-awesome-icon icon="fa-solid fa-trash-can" size="xl"/></button>
+        </div>
+        <div class="confirm" v-show="confirmationBox">
+            <p>Are you sure that you want to delete your account?</p>
+            <button class="btn" @click="confirm">Yes</button>
+            <button class="btn cancel" @click="cancel">No</button>
         </div>
     </div>
 </template>
@@ -57,7 +62,7 @@
 <script>
     import Vue from 'vue';
     import config from '@/config.js'
-    import {updateProfile,updateImage} from '@/services/auth.js'
+    import {updateProfile,updateImage,deleteUser} from '@/services/auth.js'
     import NavBar from '@/components/NavBar.vue';
     export default {
         name:'ProfilePage',
@@ -76,6 +81,7 @@
                 email:'',
                 imageUrl:'',
                 profileCreated:'',
+                confirmationBox:false,
                 edit:false
             }
         },
@@ -87,9 +93,11 @@
                 this.$refs.fileInput.click()
             },
             onFilePicked(event){
+                this.spinner = this.$loading.show(this.$spinner);
                 const files = event.target.files;
                 let fileName = files[0].name;
                 if(fileName.lastIndexOf('.')<=0){
+                    this.spinner.hide()
                     return Vue.$toast.open({
                                 message: "Please select a valid file",
                                 duration: config.toastDuration,
@@ -102,6 +110,7 @@
                     this.form.image = files[0]
                     return updateImage(this.id,this.form)
                         .then(response=>{
+                            this.spinner.hide()
                             if(response.status==="UPDATED"){
                                 Vue.$toast.open({
                                 message: "Profile Image successfully uploaded",
@@ -110,6 +119,7 @@
                                 });
                             }
                         }).catch(error=>{
+                            this.spinner.hide()
                             Vue.$toast.open({
                             message: error.response.data.message,
                             duration: config.toastDuration,
@@ -144,7 +154,40 @@
                     })
             },
             deleteAcc(){
-
+                this.confirmationBox = true;
+            },
+            confirm(){
+                this.spinner = this.$loading.show(this.$spinner);
+                this.confirmationBox=false;
+                return deleteUser(this.id)
+                        .then(response=>{
+                            if(response.status==="DELETED"){
+                                Vue.$toast.open({
+                                    message: "Account has been deleted",
+                                    duration: config.toastDuration,
+                                    type: 'success'
+                                });
+                                this.spinner.hide();
+                                this.$router.push({name:'register'})
+                            }else{
+                                this.spinner.hide();
+                                Vue.$toast.open({
+                                    message: response.message,
+                                    duration: config.toastDuration,
+                                    type: 'error'
+                                });
+                            }
+                        }).catch(error=>{
+                            this.spinner.hide();
+                            Vue.$toast.open({
+                                message: error.response.data.message,
+                                duration: config.toastDuration,
+                                type: 'error'
+                            });
+                        })
+            },
+            cancel(){
+                this.confirmationBox = false;
             }
         },
         created(){
@@ -183,6 +226,16 @@
         width: auto;
         align-items: center;
     }
+    .confirm{
+        background-color: rgba(243, 173, 173, 0.925);
+        padding: 1%;
+        position:absolute;
+        top:50%;
+        left: 10%;
+        width: 80%;
+        border-radius: 0.7em;
+        align-items: center;
+    }
     .image{
         display: flex;
         justify-content: center;
@@ -191,6 +244,7 @@
     
     img{ 
         border-radius: 10em;
+        border: 1px solid black;
     }
     .details, .edit-details{
         display: flex;
@@ -203,8 +257,11 @@
     .detail{
         padding: 1em;
         width: 25em;
-        
     }
+    .overflow-auto{
+        overflow: auto;
+    }    
+        
     select{
         margin-top: 0.2em;
         padding: 0.5em;
@@ -306,7 +363,7 @@
             height: 15em;
         }
         .detail{
-            width: 15em;
+            width: 17em;
         }
         
     }

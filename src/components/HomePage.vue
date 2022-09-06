@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="header">
-            <button class="btn" @click="redirect1">Register</button>
-            or
-            <button class="btn" @click="redirect2">Login</button>
+            <button class="btn" @click="redirect1"><font-awesome-icon icon="fa-solid fa-user-plus" size="xs"/> Register</button>
+            <span>or</span>
+            <button class="btn" @click="redirect2"><font-awesome-icon icon="fa-solid fa-arrow-right-to-bracket" /> Login</button>
         </div>
         <div class="container">
             <div class="item1 item">
@@ -70,8 +70,15 @@ export default {
         align-items: center;
         padding: 1em;
     }
+    .header span{
+        margin:0 1em;
+        color: white;
+    }
     .btn{
-        width: 5em;
+        width: 7em;
+        box-shadow: 5px 5px 5px rgba(256,256,256,0.4);
+        background-color: hsla(120,80%,30%,0.9);
+        padding: 0.5;
     }
     .container{
         width: 98.8vw;
@@ -83,21 +90,15 @@ export default {
         width: 100%;
         padding: 1em;
     }
-    .item1{
-        background-color: rgba(201, 212, 207, 0.701);
+    .container div:nth-child(2n+1){
+        background-color: rgba(201, 212, 207,1);
         color: seagreen;
+        text-align: left;
     }
-    .item2{
-        background-color: rgba(201, 202, 212, 0.701);
+    .container div:nth-child(2n){
+        background-color: rgba(201, 205, 212,1);
         color: blueviolet;
-    }
-    .item3{
-        background-color: rgba(201, 212, 207, 0.701);
-        color: seagreen;
-    }
-    .item4{
-        background-color: rgba(201, 205, 212, 0.701);
-        color: blueviolet
+        text-align: right;
     }
     @media(max-width:650px){
         /* .item{
