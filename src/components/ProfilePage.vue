@@ -191,6 +191,7 @@
             }
         },
         created(){
+            this.spinner = this.$loading.show(this.$spinner);
         this.$store.dispatch('getUser')
             .then((res)=>{
                 this.form.name = res.user.name;
@@ -203,7 +204,10 @@
                 this.imageUrl = res.user.imageUrl;
                 this.id = res.user._id;
             })
-    }
+        },
+        mounted(){
+            this.spinner.hide()
+        }
     }
 </script>
 
