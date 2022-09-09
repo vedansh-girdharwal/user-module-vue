@@ -47,16 +47,12 @@
             </div>
         </div>
         <div class="links">
-            <!-- <div id="g-signin2"></div> -->
-            <!-- <div v-if="profile">
-                <pre>{{ profile }}</pre>
-                <button @click="signOut">Sign Out</button>
-            </div> -->
+            <span><a @click="googleAuth"><font-awesome-icon icon="fa-brands fa-google" /> SignIn with Google</a></span>
             <span>|</span>
             <span><a @click="forgotPassword">Forgot your password?</a></span>
         </div>
         <div class="spinner">
-            <moon-loader :loading="processing" :color="seagreen" :size="size"></moon-loader>
+            <moon-loader :loading="processing" :color="color" :size="size"></moon-loader>
         </div>
     </div>
 </template>
@@ -71,17 +67,14 @@
         data(){
             return {
                 processing: false,
-                size:"100px",
+                size:100,
+                color:"#0077b3",
                 form: {
                     email: '',
                     password: ''
                 }
             }
         },
-        // mounted() {
-        //     this.initGoogleAuth();
-        //     this.renderGoogleAuthButton();
-        // },
         validations:{
             form:{
                 email:{
@@ -134,37 +127,12 @@
             redirect(){
                 this.$router.push({name: 'register'});
             },
+            googleAuth(){
+                window.location = `${config.BaseUrl}/auth/google`;
+            },
             forgotPassword(){
                 this.$router.push({name: 'forgotPassword'});
             },
-            // onSignIn(user) {
-            //     const profile = user.getBasicProfile();
-            //     const fullName = profile.getName();
-            //     const email = profile.getEmail();
-            //     const imageUrl = profile.getImageUrl();
-            //     this.profile = { fullName, email, imageUrl };
-            //     console.log(profile);
-            // },
-
-            // signOut() {
-            //     var auth2 = window.gapi.auth2.getAuthInstance();
-            //     auth2.signOut().then(() => {
-            //         console.log("User signed out");
-            //         this.profile = null;
-            //     });
-            // },
-
-            // initGoogleAuth() {
-            //     window.gapi.load("auth2", function () {
-            //         window.gapi.auth2.init();
-            //     });
-            // },
-
-            // renderGoogleAuthButton() {
-            //     window.gapi.signin2.render("g-signin2", {
-            //         onsuccess: this.onSignIn
-            //     });
-            // }
         }
     }
 </script>
@@ -178,11 +146,10 @@
      .links{
         display: flex;
         align-items: center;
-    }/*
-    .links button{
+    }
+    .links a{
         display: flex;
-        background-color:hsla(120,80%,30%,0.6);
+        align-items: center;
         border:white;
-        font-size: 1em;
-    } */
+    }
 </style>

@@ -10,7 +10,8 @@ import ResetPasswordPage from '@/components/ResetPasswordPage.vue';
 import UsersListPage from '@/components/UsersListPage.vue';
 import AboutPage from '@/components/AboutPage.vue';
 import ProfilePage from '@/components/ProfilePage.vue';
-import GoogleAuthentication from '@/components/GoogleAuthentication.vue';
+import MiddleWare from '@/components/MiddleWare.vue'
+import PageNotFound from '@/components/PageNotFound';
 
 import store from '@/store';
 
@@ -27,14 +28,14 @@ const router = new Router({
             component:HomePage
         },
         {
+            name:'md',
+            path:'/middleware',
+            component:MiddleWare
+        },
+        {
             name: 'register',
             path:'/register',
             component: RegisterPage
-        },
-        {
-            name:'auth',
-            path:'/googleauth',
-            component: GoogleAuthentication
         },
         {
             name:'profile',
@@ -50,7 +51,7 @@ const router = new Router({
             name: 'home',
             path:'/:name/dashboard',
             component: DashboardPage,
-            meta
+            
         },
         {
             name: 'about',
@@ -87,11 +88,15 @@ const router = new Router({
             path:'/resetPassword/:id',
             component: ResetPasswordPage
         },
-        // {
-        //     name: 'page-not-found',
-        //     path: '*',
-        //     component: PageNotFound
-        // }
+        {
+            path:'*',
+            redirect:'/error'
+        },
+        {
+            name: 'page-not-found',
+            path: '/error',
+            component: PageNotFound
+        }
     ]
 });
 

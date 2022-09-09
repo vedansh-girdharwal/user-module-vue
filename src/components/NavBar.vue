@@ -131,8 +131,8 @@ export default {
         text-align: center;
     }
     .nav-part2 .nav-item{
-        padding: 0.5em;
-        width: 200px;
+        padding: 0.3em ;
+        width: auto;
     }
     .nav-item img{
         height: 120px;

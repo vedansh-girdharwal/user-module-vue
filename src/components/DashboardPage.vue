@@ -25,6 +25,7 @@ export default {
             .then((res)=>{
                 this.name = res.user.name;
                 this.email = res.user.email;
+
             })
     }
 }

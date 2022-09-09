@@ -8,9 +8,9 @@ import { VueSpinners } from "@saeris/vue-spinners";
 import {library} from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faHouseUser,faFileLines,faUsers,faUserTie,faAddressCard,faArrowRightFromBracket,faCameraAlt,faCamera,faTrashCan,faArrowRightToBracket,faUserPlus,faUnlockKeyhole,faFloppyDisk,faXmark,faPenToSquare,faEnvelopesBulk,faKey,faUserShield} from '@fortawesome/free-solid-svg-icons'
-// import {} from '@fortawesome/free-regular-svg-icons';
+import {faGoogle} from '@fortawesome/free-brands-svg-icons';
 
-library.add(faHouseUser, faFileLines,faUsers,faUserTie,faAddressCard, faArrowRightFromBracket,faCameraAlt,faCamera,faTrashCan,faArrowRightToBracket,faUserPlus,faUnlockKeyhole,faFloppyDisk,faXmark,faPenToSquare,faEnvelopesBulk,faKey,faUserShield);
+library.add(faHouseUser, faFileLines,faUsers,faUserTie,faAddressCard, faArrowRightFromBracket,faCameraAlt,faCamera,faTrashCan,faArrowRightToBracket,faUserPlus,faUnlockKeyhole,faFloppyDisk,faXmark,faPenToSquare,faEnvelopesBulk,faKey,faUserShield,faGoogle);
 
 
 Vue.use(VueSpinners);

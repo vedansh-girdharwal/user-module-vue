@@ -69,6 +69,7 @@ export default {
         justify-content: center;
         align-items: center;
         padding: 1em;
+        background-color: rgba(255, 255, 255, 0.825);
     }
     .header span{
         margin:0 1em;
@@ -76,12 +77,12 @@ export default {
     }
     .btn{
         width: 7em;
-        box-shadow: 5px 5px 5px rgba(256,256,256,0.4);
+        box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
         background-color: hsla(120,80%,30%,0.9);
         padding: 0.5;
     }
     .container{
-        width: 98.8vw;
+        width: 99vw;
         height: auto;
     }
     .item{
@@ -100,7 +101,19 @@ export default {
         color: blueviolet;
         text-align: right;
     }
-    @media(max-width:650px){
+    @media(650px< width <940px){
+
+        h1{
+            font-size: 2em;
+        }
+        h2{
+            font-size:1.3em;
+        }
+        img{
+            width: 400px;
+        }
+    }
+    @media(width <=650px){
         /* .item{
             flex-direction: column;
         } */
@@ -109,6 +122,12 @@ export default {
         }
         .container div:nth-child(2n){
             flex-direction:column-reverse;   
+        }
+        h1{
+            font-size: 2em;
+        }
+        h2{
+            font-size: 1.2em;
         }
     }
 

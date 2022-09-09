@@ -24,7 +24,7 @@ export default {
         font-family: 'Roboto',sans-serif;
     }
     *::-webkit-scrollbar {
-        width: 12px;
+        width: 10px;
     }
 
     *::-webkit-scrollbar-track {
@@ -34,7 +34,10 @@ export default {
     *::-webkit-scrollbar-thumb {
         background-color: rgb(0, 81, 173);    
         border-radius: 20px;       
-        border: 3px solid rgb(0,142,57);
+        /* border: 3px solid rgb(0,142,57); */
+    }
+    *::-webkit-scrollbar-corner{
+        background-color: rgba(0, 142, 57, 0.751);
     }
     h1{
         font-weight: 100;
