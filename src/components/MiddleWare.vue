@@ -15,10 +15,12 @@ export default {
             username:''
         }
     },
-    beforeCreate(){
+    created(){
         this.token = this.$route.query.token;
         this.username = this.$route.query.name;
-        localStorage.setItem('token',this.token);
+        localStorage.setItem("role",this.$route.query.role);
+        this.$store.commit('setRole',this.$route.query.role);
+        this.$store.commit('setToken',this.token);
     },
     mounted(){
         Vue.$toast.open({

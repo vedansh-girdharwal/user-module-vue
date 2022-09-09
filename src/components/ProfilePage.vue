@@ -106,11 +106,12 @@
                 }
                 const fileReader = new FileReader();
                 fileReader.addEventListener('load',()=>{
-                    this.imageUrl = fileReader.result
+                    // this.imageUrl = fileReader.result
                     this.form.image = files[0]
                     return updateImage(this.id,this.form)
                         .then(response=>{
                             this.spinner.hide()
+                            this.imageUrl = response.imageUrl;
                             if(response.status==="UPDATED"){
                                 Vue.$toast.open({
                                 message: "Profile Image successfully uploaded",

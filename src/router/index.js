@@ -51,7 +51,7 @@ const router = new Router({
             name: 'home',
             path:'/:name/dashboard',
             component: DashboardPage,
-            
+            meta
         },
         {
             name: 'about',

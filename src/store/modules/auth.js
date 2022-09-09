@@ -12,7 +12,9 @@ const auth = {
         email:localStorage.getItem(EMAIL_KEY) || "",
         role:localStorage.getItem(ROLE_KEY) || "",
         name: '',
-        userId:localStorage.getItem(USER_ID)||""    },
+        userId:localStorage.getItem(USER_ID)||"",
+        imageUrl:""    
+    },
     getters:{
         isAuthenticated(state){
             return !!state.token;
@@ -28,7 +30,8 @@ const auth = {
         },
         getUserId(state){
             return state.userId;
-        }
+        },
+
     },
     mutations:{
         setToken(state, token){

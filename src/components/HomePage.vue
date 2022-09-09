@@ -82,7 +82,7 @@ export default {
         padding: 0.5;
     }
     .container{
-        width: 99vw;
+        width: auto;
         height: auto;
     }
     .item{
@@ -110,7 +110,7 @@ export default {
             font-size:1.3em;
         }
         img{
-            width: 400px;
+            width: 390px;
         }
     }
     @media(width <=650px){
@@ -128,6 +128,9 @@ export default {
         }
         h2{
             font-size: 1.2em;
+        }
+        img{
+            width: 330px;
         }
     }
 
