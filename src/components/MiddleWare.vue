@@ -18,7 +18,7 @@ export default {
     created(){
         this.token = this.$route.query.token;
         this.username = this.$route.query.name;
-        localStorage.setItem("role",this.$route.query.role);
+        localStorage.setItem('token',this.token);
         this.$store.commit('setRole',this.$route.query.role);
         this.$store.commit('setToken',this.token);
     },
