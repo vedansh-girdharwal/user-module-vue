@@ -36,7 +36,8 @@ export default {
         background-size: 100% 100%;
     }
     h1{
-        color: white;
+        color: rgb(220, 220, 132);
+        font-weight: 500;
     }
 
 </style>

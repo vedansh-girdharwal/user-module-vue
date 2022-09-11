@@ -349,7 +349,7 @@
         text-align: center;
         border-radius: 5px;
         padding: 5px 0;
-        transition: opacity 1s ease-in-out;
+        transition: opacity 0.5s ease-in-out;
 
         position: absolute;
         /* z-index: 1; */

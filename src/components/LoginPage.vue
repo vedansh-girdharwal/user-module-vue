@@ -39,21 +39,25 @@
                     <button class="btn" :disabled="$v.form.$invalid">
                         <font-awesome-icon icon="fa-solid fa-arrow-right-to-bracket" /> Login
                     </button>
+                    
                 </div>
+                
             </form>
+            <hr style="width:86%">
+                <div class="google">
+                    <button @click="googleAuth" class="btn"><font-awesome-icon icon="fa-brands fa-google" /> SignIn with Google</button>
+                </div>
             <div class="redirect">
                 <hr>
                 Don't have an account? <a @click="redirect">Register</a>
             </div>
         </div>
         <div class="links">
-            <span><a @click="googleAuth"><font-awesome-icon icon="fa-brands fa-google" /> SignIn with Google</a></span>
-            <span>|</span>
-            <span><a @click="forgotPassword">Forgot your password?</a></span>
+            <a @click="forgotPassword">Forgot your password?</a>
         </div>
-        <div class="spinner">
+        <!-- <div class="spinner">
             <moon-loader :loading="processing" :color="color" :size="size"></moon-loader>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -139,17 +143,15 @@
 
 <style scoped>
     .links *{
-            margin: 0.5em;
             color: white;
             cursor: pointer;
     }
-     .links{
-        display: flex;
-        align-items: center;
+    .links{
+        padding: 1em;
     }
-    .links a{
+    .google{
         display: flex;
-        align-items: center;
-        border:white;
+        justify-content:center;
+        padding: 0.5em 1.7em;
     }
 </style>

@@ -77,26 +77,9 @@
 
 <style scoped>
     .container{
-        margin-top: 5em;
+        margin-top: 4em;
         padding: 2em;
-        align-items: center;
+        height:auto;
         justify-content: center;
-    }
-    @media(650px<= width <=829px){
-       .container{
-        margin-top:8em;
-        }
-    }
-    @media (width<=650px) {
-      .container{
-        /* margin-top:260px; */
-        margin-top:15em;
-        }
-    }
-    /* @media (max-width:448px) {
-      .container{
-        margin-top:18em;
-        }
-    } */
-    
+    }    
 </style>

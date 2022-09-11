@@ -60,7 +60,7 @@ export default {
     }
     .box{
         background-color: rgba(255,255,255,0.9);
-        border-radius: 0.7em;
+        border-radius: 0.5em;
         width: 50%;
         display: flex;
         flex-direction: column;
@@ -83,7 +83,7 @@ export default {
         margin-top: 0.2em;
         padding: 0.5em;
         width: 100%;
-        border-radius: 0.5em;
+        border-radius: 0.3em;
         border: 1px solid green;
         font-size: 1.2em;
     }
@@ -103,7 +103,7 @@ export default {
     .btn{
         font-size: 1.2em;
         padding: 0.6em;
-        border-radius: 0.5em;
+        border-radius: 0.3em;
         width: 100%;
         background-color: hsla(120,80%,30%,0.8);
         color:white;

@@ -26,6 +26,9 @@
                 </div>
             </form>
         </div>
+        <div class="links">
+            <a @click="redirect">Back to Login</a>
+        </div>
     </div>
 </template>
 
@@ -98,11 +101,20 @@
             },
             errorClass(field){
                 return field.$error;
+            },
+            redirect(){
+                this.$router.push({name:'login'})
             }
         }
 }
 </script>
 
-<style>
-
+<style scoped>
+    .links *{
+            color: white;
+            cursor: pointer;
+    }
+    .links{
+        padding: 1em;
+    }
 </style>

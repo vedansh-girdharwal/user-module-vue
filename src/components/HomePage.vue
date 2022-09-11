@@ -2,20 +2,23 @@
     <div>
         <div class="header">
             <button class="btn" @click="redirect1"><font-awesome-icon icon="fa-solid fa-user-plus" size="xs"/> Register</button>
-            <span>or</span>
+            <div class="logo">
+                <img src="../assets/logo (2).png" alt="">
+                <span><b>User Module</b></span>
+            </div>
             <button class="btn" @click="redirect2"><font-awesome-icon icon="fa-solid fa-arrow-right-to-bracket" /> Login</button>
         </div>
         <div class="container">
-            <div class="item1 item">
+            <div class="item">
                 <div class="text">
-                    <h1>Don't have an account? </h1>
+                    <h1 style="text-align:left">Don't have an account? </h1>
                     <h2>We got you covered. Register yourself with minimalist info.</h2>                    
                 </div>
                 <div class="image">
                     <img src="../assets/register-image.png" alt="">
                 </div>
             </div>
-            <div class="item2 item">
+            <div class="item">
                 <div class="image">
                     <img src="../assets/otp-image.png" alt="">
                 </div>
@@ -24,7 +27,7 @@
                     <h2>Get yourself verified through otp.</h2>                    
                 </div>
             </div>
-            <div class="item3 item">
+            <div class="item">
                 <div class="text">
                     <h1>Have a verified account? </h1>
                     <h2>Log in and maintain your profile</h2>                    
@@ -33,13 +36,22 @@
                     <img src="../assets/edit-profile-image.png" alt="">
                 </div>
             </div>
-            <div class="item4 item">
+            <div class="item">
                 <div class="image">
-                    <img src="../assets/forget-password-image.png" alt="">
+                    <img src="../assets/google-sign.png" alt="">
                 </div>
                 <div class="text">
-                    <h1>Forgot your password? </h1>
+                    <h1 style="text-align:right">Google Signin</h1>
+                    <h2>You can signin with your Google account.</h2>                    
+                </div>
+            </div>
+            <div class="item">
+                <div class="text">
+                    <h1 style="text-align:left">Forgot your password? </h1>
                     <h2>We got you covered. Reset your password via email.</h2>                    
+                </div>
+                <div class="image">
+                    <img src="../assets/forget-password-image.png" alt="">
                 </div>
             </div>
         </div>
@@ -66,20 +78,29 @@ export default {
     }
     .header{
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        padding: 1em;
-        background-color: rgba(255, 255, 255, 0.825);
+        padding: 0.5em 1em;
+        background-color: rgba(255, 255, 255);
     }
-    .header span{
+    .logo{
+        display: flex;
+        align-items: center;
+        font-size: 1.5em;
+        color:cadetblue;
+        font-weight: 900;
+    }
+    .logo img{
+        width: 50px;
+    }
+    /* .header span{
         margin:0 1em;
-        color: white;
-    }
+    } */
     .btn{
         width: 7em;
         box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
         background-color: hsla(120,80%,30%,0.9);
-        padding: 0.5;
+        padding: 0.5em;
     }
     .container{
         width: auto;
@@ -131,6 +152,18 @@ export default {
         }
         img{
             width: 330px;
+        }
+        .logo{
+            font-size: 1.4em;
+            font-weight: 500;
+        }
+        .logo img{
+            width: 40px;
+        }
+        .btn{
+            width: 6em;
+            font-size: 1em;
+            padding: 0.5em;
         }
     }
 

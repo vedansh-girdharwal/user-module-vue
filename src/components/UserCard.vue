@@ -49,7 +49,7 @@ export default {
         width: 99%;
     }
     .user{
-        width:50vw;
+        width:auto;
     }
     .changeRole{
         display: flex;
@@ -72,7 +72,7 @@ export default {
     @media (max-width:650px) {
         .box{
             flex-direction: column;
-            size: auto;
+            /* size: auto; */
             padding: 3%;
         }
         .changeRole{

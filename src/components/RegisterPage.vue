@@ -63,7 +63,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <ClipLoader :loading="processing" color="#bada55" :size="150" sizeUnit="px" :position="absolute"/> -->
 
                 <div class="form-group">
                     <button class="btn " :disabled="$v.form.$invalid || $v.cnfPassword.$invalid || processing">

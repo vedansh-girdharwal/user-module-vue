@@ -9,7 +9,7 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 Vue.use(VueLoading)
 
 Vue.prototype.$spinner = {
-  color: "seagreen",
+  color: "#0077b3",
   backgroundColor: "grey",
   blur: "9px",
   height: 100,
