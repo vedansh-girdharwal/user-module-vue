@@ -122,6 +122,14 @@ export default {
         background-color: rgba(38, 100, 38, 0.5);
         cursor:initial;
     }
+    .links *{
+            color: white;
+            cursor: pointer;
+            
+    }
+    .links{
+        padding: 1em;
+    }
     .redirect a{
         color: green;
         cursor: pointer;
