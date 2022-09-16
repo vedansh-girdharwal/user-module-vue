@@ -262,13 +262,13 @@ export default {
             flex-direction:column-reverse;   
         } */
         .container div{
-            padding: 0.5em;
+            padding: 0.4em;
         }
         .container{
             padding: 2em;
         }
         h1{
-            font-size: 1em;
+            font-size: 1.1em;
         }
         h2{
             font-size: 0.7em;
@@ -284,10 +284,10 @@ export default {
             font-weight: 400;
         }
         .logo img{
-            width: 30px;
+            width: 35px;
         }
         .btn{
-            width: 35%;
+            width: 38%;
             max-width: 7em;
             font-size: 60%;
             padding: 1%;
