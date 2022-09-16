@@ -261,11 +261,17 @@ export default {
         /* .container div:nth-child(2n){
             flex-direction:column-reverse;   
         } */
+        .container div{
+            padding: 0.6em;
+        }
+        .container{
+            padding: 2em;
+        }
         h1{
-            font-size: 2em;
+            font-size: 1.8em;
         }
         h2{
-            font-size: 1.2em;
+            font-size: 1em;
         }
         /* img{
             width: 330px;
@@ -279,8 +285,8 @@ export default {
         }
         .btn{
             width: 6em;
-            font-size: 1em;
-            padding: 0.5em;
+            font-size: 0.9em;
+            padding: 0.4em;
         }
     }
     @media (max-width:750px){
