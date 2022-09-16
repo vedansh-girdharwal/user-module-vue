@@ -143,6 +143,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        text-align: center;
         padding: 0.5em 1em;
         background-color: rgba(255, 255, 255);
     }
@@ -262,31 +263,34 @@ export default {
             flex-direction:column-reverse;   
         } */
         .container div{
-            padding: 0.6em;
+            padding: 0.5em;
         }
         .container{
             padding: 2em;
         }
         h1{
-            font-size: 1.8em;
+            font-size: 1.6em;
         }
         h2{
-            font-size: 1em;
+            font-size: 0.9em;
         }
         /* img{
             width: 330px;
         } */
+        .header{
+            padding: 0.4em;
+        }
         .logo{
-            font-size: 1.4em;
+            font-size: 1.2em;
             font-weight: 500;
         }
         .logo img{
-            width: 40px;
+            width: 35px;
         }
         .btn{
-            width: 6em;
-            font-size: 0.9em;
-            padding: 0.4em;
+            width: 7em;
+            font-size: 0.8em;
+            padding: 0.3em;
         }
     }
     @media (max-width:750px){
