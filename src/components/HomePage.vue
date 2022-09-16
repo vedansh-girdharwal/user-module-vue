@@ -284,9 +284,10 @@ export default {
             font-weight: 400;
         }
         .logo img{
-            width: 35px;
+            width: 30px;
         }
         .btn{
+            margin: 0 0.5%;
             width: 38%;
             max-width: 7em;
             font-size: 60%;
