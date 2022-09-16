@@ -67,7 +67,7 @@ const router = new Router({
         },
         {
             name: 'verifyOTP',
-            path:'/verifyOTP',
+            path:'/:id/verifyOTP',
             component: VerifyOTPPage
         },
         {

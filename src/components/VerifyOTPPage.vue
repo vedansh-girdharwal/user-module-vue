@@ -54,7 +54,7 @@ export default {
             this.$v.otp.$touch();
             if(!this.$v.otp.$invalid){
                 this.spinner = this.$loading.show(this.$spinner);
-                verifyOTP(this.otp,this.$store.getters.getUserId).then((res)=>{
+                verifyOTP(this.otp,this.$route.params.id).then((res)=>{
                     if(res.status ==='VERIFIED'){
                         this.spinner.hide()
                         this.$router.push({name:'success', params:{message:'Email has been verified. You can now '}});
@@ -79,7 +79,7 @@ export default {
         },
         resendOTP(){
             this.spinner = this.$loading.show(this.$spinner);
-            resendOTP(this.$store.getters.getUserId)
+            resendOTP(this.$route.params.id)
             .then((res)=>{
                 this.spinner.hide()
                 Vue.$toast.open({

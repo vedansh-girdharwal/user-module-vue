@@ -9,6 +9,19 @@
             <button class="btn" @click="redirect2"><font-awesome-icon icon="fa-solid fa-arrow-right-to-bracket" /> Login</button>
         </div>
         <div class="container">
+            <transition-group name="fade" tag="div">
+                <div v-for="i in [currentIndex]" :key="i">
+                    <img :src="currentImg" class="slider-img" />
+                    <section>
+                        <h1>{{currentMsg}}</h1>
+                        <h2>{{currentMsg2}}</h2>    
+                    </section>
+                </div>
+            </transition-group>
+            <a class="prev" @click="prev" href="#">&#10094;</a>
+            <a class="next" @click="next" href="#">&#10095;</a>
+        </div>
+        <!-- <div class="container">
             <div class="item">
                 <div class="text">
                     <h1 style="text-align:left">Don't have an account? </h1>
@@ -54,19 +67,69 @@
                     <img src="../assets/forget-password-image.png" alt="">
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script>
 export default {
     name: 'HomePage',
+    data(){
+        return{
+            images:[
+                require("../assets/register-image.png"),
+                require("../assets/otp-image.png"),
+                require("../assets/edit-profile-image.png"),
+                require("../assets/google-sign.png"),
+                require("../assets/forget-password-image.png")
+            ],
+            msgs:[
+                "Dont have an account?",
+                "Account created?",
+                "Got your account verified?",
+                "Google login",
+                "Forgot your password?"
+            ],
+            msgs2:[
+                "We got you covered. Register yourself with minimalist info.",
+                "Get yourself verified through otp.",
+                "Log in and maintain your profile.",
+                "You can signin with your Google account.",
+                "We got you covered. Reset your password via email."
+            ],
+            timer: null,
+            currentIndex:-1
+        }
+    },
+    mounted(){
+        this.startSlide();
+    },
     methods:{
+        startSlide(){
+            this.timer = setInterval(this.next(),4000);
+        },
+        next(){
+            this.currentIndex += 1;
+        },
+        prev(){
+            this.currentIndex -= 1;
+        },
         redirect1(){
         this.$router.push({name:'register'})
         },
         redirect2(){
         this.$router.push({name:'login'})
+        }
+    },
+    computed:{
+        currentImg(){
+            return this.images[Math.abs(this.currentIndex)% this.images.length];
+        },
+        currentMsg(){
+            return this.msgs[Math.abs(this.currentIndex)% this.msgs.length];
+        },
+        currentMsg2(){
+            return this.msgs2[Math.abs(this.currentIndex)% this.msgs2.length];
         }
     }
 }
@@ -102,11 +165,67 @@ export default {
         background-color: hsla(120,80%,30%,0.9);
         padding: 0.5em;
     }
-    .container{
-        width: auto;
-        height: auto;
+
+    .fade-enter-active, .fade-leave-active{
+        transition: all 0.9s ease;
+        overflow: hidden;
+        visibility: visible;
+        position: absolute;
+        width: 100%;
+        opacity: 1;
     }
-    .item{
+
+    .fade-enter, .fade-leave-to{
+        visibility: hidden;
+        width: 100%;
+        opacity: 0;
+    }
+    .slider-img{
+        height: auto;
+        width: 100%;
+    }
+    .container div {
+        border-radius: 0.7em;
+        background-color: white;
+        text-align: center;
+        color: rgb(43, 64, 226);
+        display: flex;
+        align-items: center;
+        padding: 1em;
+    }
+    .prev, .next{
+        cursor: pointer;
+        position: absolute;
+        top: 40%;
+        width: auto;
+        padding: 16px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.7s ease;
+        border-radius: 1em;
+        text-decoration: none;
+        user-select: none;
+    }
+    .next{
+        right: 0;
+    }
+    .prev{
+        left: 0;
+    }
+    .prev:hover, .next:hover{
+        background-color: rgba(0,0,0,1)
+    }
+
+
+
+    .container{
+        width: 100%;
+        height: auto;
+        padding:3em;
+        align-items: center;
+    }
+    /* .item{
         display: flex;
         justify-content: space-between;
         width: 100%;
@@ -121,7 +240,7 @@ export default {
         background-color: rgba(201, 205, 212,1);
         color: blueviolet;
         text-align: right;
-    }
+    } */
     @media(650px< width <940px){
 
         h1{
@@ -130,29 +249,27 @@ export default {
         h2{
             font-size:1.3em;
         }
-        img{
+        /* img{
             width: 390px;
-        }
+        } */
     }
     @media(width <=650px){
         /* .item{
             flex-direction: column;
         } */
-        .container div:nth-child(2n+1){
-            flex-direction: column;   
-        }
-        .container div:nth-child(2n){
+        
+        /* .container div:nth-child(2n){
             flex-direction:column-reverse;   
-        }
+        } */
         h1{
             font-size: 2em;
         }
         h2{
             font-size: 1.2em;
         }
-        img{
+        /* img{
             width: 330px;
-        }
+        } */
         .logo{
             font-size: 1.4em;
             font-weight: 500;
@@ -165,6 +282,18 @@ export default {
             font-size: 1em;
             padding: 0.5em;
         }
+    }
+    @media (max-width:750px){
+        .container div{
+            flex-direction: column;   
+        }
+        /* .prev, .next{
+            color: black;
+            font-size: 1em;
+        }
+        .prev:hover, .next:hover{
+            background-color: rgba(255,255,255,1)
+        } */
     }
 
 </style>

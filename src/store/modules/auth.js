@@ -55,7 +55,7 @@ const auth = {
             return register(form)
                 .then(response=>{
                     const {_id}=response.data;
-                    localStorage.setItem(USER_ID,_id);
+                    // localStorage.setItem(USER_ID,_id);
                     commit('setUserId',_id);
                     return response;
                 })

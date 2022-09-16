@@ -140,7 +140,7 @@
                                 duration: config.toastDuration,
                                 type: 'success'
                             });
-                        this.$router.push({name:'verifyOTP'})
+                        this.$router.push({name:'verifyOTP',params:{id:res.data._id}})
                         this.processing=false
                         this.spinner.hide()}).catch(error=>{
                             this.processing=false

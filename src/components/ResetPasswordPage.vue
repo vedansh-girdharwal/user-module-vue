@@ -85,12 +85,13 @@
                     this.spinner = this.$loading.show(this.$spinner);
                     resetPassword(this.form,this.$route.params.id)
                         .then((res)=>{
-                            this.spinner.hide()
                             Vue.$toast.open({
                                 message: res.message,
                                 duration: config.toastDuration,
                                 type: 'success'
-                            })}).then(()=>{
+                            })
+                        }).then(()=>{
+                            this.spinner.hide()
                                 this.$router.push({
                                     name:'success', 
                                     params:{message:'Password has been reset. You can move to '}
