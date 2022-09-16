@@ -196,7 +196,7 @@ export default {
     .prev, .next{
         cursor: pointer;
         position: absolute;
-        top: 35%;
+        top: 45%;
         width: auto;
         padding: 16px;
         color: white;
@@ -221,7 +221,7 @@ export default {
 
     .container{
         width: 100%;
-        height: auto;
+        height: 90vh;
         padding:3em;
         align-items: center;
     }
