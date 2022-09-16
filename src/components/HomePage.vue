@@ -143,7 +143,6 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        text-align: center;
         padding: 0.5em 1em;
         background-color: rgba(255, 255, 255);
     }
@@ -197,7 +196,7 @@ export default {
     .prev, .next{
         cursor: pointer;
         position: absolute;
-        top: 40%;
+        top: 35%;
         width: auto;
         padding: 16px;
         color: white;
@@ -242,19 +241,19 @@ export default {
         color: blueviolet;
         text-align: right;
     } */
-    @media(650px< width <940px){
+    @media(550px< width <940px){
 
         h1{
-            font-size: 2em;
+            font-size: 1.9em;
         }
         h2{
-            font-size:1.3em;
+            font-size:1.2em;
         }
         /* img{
             width: 390px;
         } */
     }
-    @media(width <=650px){
+    @media(width <=550px){
         /* .item{
             flex-direction: column;
         } */
@@ -269,10 +268,10 @@ export default {
             padding: 2em;
         }
         h1{
-            font-size: 1.6em;
+            font-size: 1em;
         }
         h2{
-            font-size: 0.9em;
+            font-size: 0.7em;
         }
         /* img{
             width: 330px;
@@ -281,16 +280,17 @@ export default {
             padding: 0.4em;
         }
         .logo{
-            font-size: 1.2em;
-            font-weight: 500;
+            font-size: 90%;
+            font-weight: 400;
         }
         .logo img{
-            width: 35px;
+            width: 30px;
         }
         .btn{
-            width: 7em;
-            font-size: 0.8em;
-            padding: 0.3em;
+            width: 35%;
+            max-width: 7em;
+            font-size: 60%;
+            padding: 1%;
         }
     }
     @media (max-width:750px){
